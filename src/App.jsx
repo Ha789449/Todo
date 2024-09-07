@@ -28,7 +28,7 @@ function App() {
       setTodos(updatedTodos);  // Update the todos state with the edited todo
       setIsEditing(false);  // Reset editing mode after saving the changes
     } else {
-      // Create a new todo with an ID, name, description, date, and a default `completed` status
+      // Create a new todo with an ID, name, description, date, and a default completed status
       const newTodo = {
         id: Date.now(),  // Using the current timestamp as a unique ID for the todo
         name,
@@ -68,7 +68,7 @@ function App() {
   const handleComplete = (id) => {
     const updatedTodos = todos.map(todo => 
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );  // Toggle the `completed` property of the matching todo
+    );  // Toggle the completed property of the matching todo
     setTodos(updatedTodos);  // Update the todos state with the modified todo
   };
 
@@ -77,21 +77,21 @@ function App() {
       <Navbar />  {/* Render the Navbar component */}
       <div className='bg-orange-400 h-[160vh] md:h-[120vh] w-[100%] '>
         <div className='flex justify-center py-10'>
-          <div className='font-bold text-2xl text-white'>Todo List</div>  {/* Display the heading */}
+          <div className='font-bold text-4xl lg:text-5xl md:text-3xl text-white'>Todo List</div>  {/* Display the heading */}
         </div>
         <div className='flex flex-col flex-wrap items-center justify-center w-full overflow-hidden'>
           <form 
-            className='bg-gray-600 w-[80%] md:w-[60%] gap-y-5 gap-0 flex justify-between items-end flex-wrap p-5 mb-4 text-white font-semibold' 
+            className='bg-gray-600 w-[80%] md:w-[60%] gap-y-5 gap-0 flex justify-between items-end flex-wrap p-5 mb-4 text-white font-semibold rounded' 
             onSubmit={handleSubmit}  // Attach the handleSubmit function to the form's submit event
           >
-            <div className='flex flex-wrap gap-x-2 xl:gap-8'>
+            <div className='flex flex-wrap gap-x-2 xl:gap-8 md:gap-4'>
               <div className='flex flex-col'>
                 <label htmlFor="name" className="px-1 py-2">Name</label>
                 <input 
                   required id="name" 
                   className="w-[93%] px-2 py-1 font-normal text-black border border-orange-500 rounded-lg focus:outline-none" 
                   type="text" value={name} 
-                  onChange={(e) => setName(e.target.value)}  // Update the `name` state when the input changes
+                  onChange={(e) => setName(e.target.value)}  // Update the name state when the input changes
                 />
               </div>
               <div className='flex flex-col'>
@@ -100,7 +100,7 @@ function App() {
                   required id="description" 
                   className="w-[93%] px-2 py-1 font-normal text-black border border-orange-500 rounded-lg focus:outline-none" 
                   type="text" value={description} 
-                  onChange={(e) => setDescription(e.target.value)}  // Update the `description` state when the input changes
+                  onChange={(e) => setDescription(e.target.value)}  // Update the description state when the input changes
                 />
               </div>
               <div className='flex flex-col'>
@@ -109,33 +109,32 @@ function App() {
                   required id="date" 
                   className="w-[93%] px-2 py-1 font-normal text-black border border-orange-500 rounded-lg focus:outline-none" 
                   type="date" value={date} 
-                  onChange={(e) => setDate(e.target.value)}  // Update the `date` state when the input changes
+                  onChange={(e) => setDate(e.target.value)}  // Update the date state when the input changes
                 />
               </div>
             </div>
             <div className="mb-[10px]">
-              <button className="px-4 py-2 mt-0 bg-orange-400 rounded-md xl:mt-9" type="submit">
+              <button className="px-4 py-2 mt-0 bg-gray-400 rounded-md xl:mt-9" type="submit">
                 {isEditing ? 'Edit Todo' : 'Add Todo'}  {/* Change button text depending on edit mode */}
               </button>
             </div>
           </form>
           
           {/* Display the todos list */}
-          <div className="w-[80%] md:w-[60%] bg-gray-600 px-2 py-3 md:px-5 text-white font-semibold flex justify-center items-center flex-col">
+          <div className="w-[80%] md:w-[60%] bg-gray-600 px-2 py-3  md:px-5 text-white font-semibold flex justify-center items-center flex-col">
             {todos.length === 0 ? (
               <h2 className="mb-3 text-3xl font-bold text-orange-400 md:text-5xl">
                 Empty Todos  {/* Show this message if no todos exist */}
               </h2>
             ) : (
               <>
-              <div className='bg-gray-400 w-full'>
-                <h2 className="mb-3 text-3xl font-bold text-green-400 flex justify-center md:text-5xl">
+              <div className=' w-full rounded'>
+                <h2 className="mb-3 text-3xl font-bold text-green-400  flex justify-center md:text-5xl">
                   Added Todo  {/* Show this message if at least one todo is added */}
                 </h2>
-              
-                <ul className="max-h-[490px] overflow-y-auto w-[99%] p-0">
+                
                   {todos.map((todo) => (
-                    <li key={todo.id} className="flex justify-between items-center py-2">
+                    <div key={todo.id} className="flex justify-between items-center p-2 w-auto bg-[rgba(0,0,0,0.5)] m-5 rounded">
                       <div>
                         <p className={`font-bold ${todo.completed ? 'line-through text-green-500' : ''}`}>{todo.name}</p>  {/* Apply line-through if completed */}
                         <p className={`${todo.completed ? 'line-through text-green-500' : ''}`}>{todo.description}</p>  {/* Apply line-through if completed */}
@@ -151,13 +150,11 @@ function App() {
                         <button className="bg-red-500 px-2 py-1 rounded" onClick={() => handleDelete(todo.id)}>
                           Delete  {/* Trigger the delete confirmation and remove the todo */}
                         </button>
-                        
                       </div>
-                    </li>
-                    
+                    </div>                    
                   ))}
-                </ul>
-                </div>
+                  </div>
+           
               </>
             )}
           </div>
