@@ -128,8 +128,8 @@ function App() {
               </h2>
             ) : (
               <>
-              <div className='bg-gray-400 w-full'>
-                <h2 className="mb-3 text-3xl font-bold text-green-400 md:text-5xl">
+              <div className='bg-gray-400 w-full '>
+                <h2 className="mb-3 text-3xl flex justify-center font-bold text-green-400 md:text-5xl">
                   Added Todo  {/* Show this message if at least one todo is added */}
                 </h2>
               
