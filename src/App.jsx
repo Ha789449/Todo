@@ -81,7 +81,7 @@ function App() {
         </div>
         <div className='flex flex-col flex-wrap items-center justify-center w-full overflow-hidden'>
           <form 
-            className='bg-gray-600 w-[30%] md:w-[60%] gap-y-5 gap-0 flex justify-between items-end flex-wrap p-5 mb-4 text-white font-semibold' 
+            className='bg-gray-600 w-[80%] md:w-[60%] gap-y-5 gap-0 flex justify-between items-end flex-wrap p-5 mb-4 text-white font-semibold' 
             onSubmit={handleSubmit}  // Attach the handleSubmit function to the form's submit event
           >
             <div className='flex flex-wrap gap-x-2 xl:gap-8'>
@@ -128,8 +128,8 @@ function App() {
               </h2>
             ) : (
               <>
-              <div className='bg-gray-400 w-full '>
-                <h2 className="mb-3 text-3xl flex justify-center font-bold text-green-400 md:text-5xl">
+              <div className='bg-gray-400 w-full'>
+                <h2 className="mb-3 text-3xl font-bold text-green-400 flex justify-center md:text-5xl">
                   Added Todo  {/* Show this message if at least one todo is added */}
                 </h2>
               
