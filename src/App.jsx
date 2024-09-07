@@ -1,54 +1,3 @@
-// import { useState, useEffect } from 'react'
-// import Navbar from './Components/Navbar'
-// // import { FaEdit } from "react-icons/fa";
-// // import { AiFillDelete } from "react-icons/ai";
-// // import { stringify, v4 as uuidv4 } from 'uuid';
-
-// function App() {
-//   return (
-//     <>
-//       <Navbar />
-//       <div className='bg-orange-400 h-[160vh] md:h-[120vh] w-[100%] '>
-//         <div className='flex justify-center py-10'>
-//           <div className='font-bold text-2xl text-white'>Todo List</div>
-//         </div>
-//         <div className='flex flex-col flex-wrap items-center justify-center  w-full overflow-hidden'>
-//           <form className='bg-gray-600 w-[80%] md:w-[60%] gap-y-5 gap-0 flex justify-between items-end flex-wrap p-5 mb-4 text-white font-semibold'>
-//             <div className='flex flex-wrap gap-x-2 xl:gap-8'>
-//               <div className='flex flex-col'>
-//                 <label for="name" class="px-1 py-2">Name</label>
-
-//                 <input required id="name" class="w-[93%] px-2 py-1 font-normal text-black border border-orange-500 rounded-lg focus:outline-none" type="text" value></input>
-//               </div>
-//               <div className='flex flex-col'>
-//                 <label for="description" class="px-1 py-2">Description</label>
-//                 <input required id="description" class="w-[93%] px-2 py-1 font-normal text-black border border-orange-500 rounded-lg focus:outline-none" type="text" value></input>
-//               </div>
-//               <div className=' flex flex-col'>
-//               <label for="date" class="px-1 py-2">Date</label>
-//               <input required id="date" class="w-[93%] px-2 py-1 font-normal text-black border border-orange-500 rounded-lg focus:outline-none" type="text" value></input>
-//               </div>
-             
-//             </div>
-//             <div class="mb-[10px]">
-//                 <button class="px-4 py-2 mt-0 bg-orange-400 rounded-md xl:mt-9" type="submit">Add Todo</button>
-//               </div>
-//           </form>
-//       <div class="w-[80%] md:w-[60%] bg-gray-600 px-2 py-3 md:px-5 text-white font-semibold flex justify-center items-center flex-col">
-//         <h2 class="mb-3 text-3xl font-bold text-orange-400 md:text-5xl">
-//           Empty Todos
-//         </h2>
-//         <ul class="max-h-[490px] overflow-y-auto w-[99%] p-0"></ul>
-//       </div>
-//         </div>
-//       </div>
-//     </>
-//   )
-// }
-
-// export default App
-
-
 import { useState } from 'react';  // Importing the useState hook to manage state in the component
 import Navbar from './Components/Navbar';  // Importing the Navbar component to include it in the App
 
@@ -132,7 +81,7 @@ function App() {
         </div>
         <div className='flex flex-col flex-wrap items-center justify-center w-full overflow-hidden'>
           <form 
-            className='bg-gray-600 w-[80%] md:w-[60%] gap-y-5 gap-0 flex justify-between items-end flex-wrap p-5 mb-4 text-white font-semibold' 
+            className='bg-gray-600 w-[30%] md:w-[60%] gap-y-5 gap-0 flex justify-between items-end flex-wrap p-5 mb-4 text-white font-semibold' 
             onSubmit={handleSubmit}  // Attach the handleSubmit function to the form's submit event
           >
             <div className='flex flex-wrap gap-x-2 xl:gap-8'>
@@ -178,36 +127,45 @@ function App() {
                 Empty Todos  {/* Show this message if no todos exist */}
               </h2>
             ) : (
-              <ul className="max-h-[490px] overflow-y-auto w-[99%] p-0">
-                {todos.map((todo) => (
-                  <li key={todo.id} className="flex justify-between items-center py-2">
-                    <div>
-                      <p className={`font-bold ${todo.completed ? 'line-through text-green-500' : ''}`}>{todo.name}</p>  {/* Apply line-through if completed */}
-                      <p className={`${todo.completed ? 'line-through text-green-500' : ''}`}>{todo.description}</p>  {/* Apply line-through if completed */}
-                      <p>{todo.date}</p>  {/* Display the todo date */}
-                    </div>
-                    <div className="flex gap-2">
-                      <button className="bg-blue-500 px-2 py-1 rounded" onClick={() => handleComplete(todo.id)}>
-                        Complete  {/* Mark the todo as complete */}
-                      </button>
-                      <button className="bg-yellow-500 px-2 py-1 rounded" onClick={() => handleEdit(todo.id)}>
-                        Edit  {/* Enable editing mode for the selected todo */}
-                      </button>
-                      <button className="bg-red-500 px-2 py-1 rounded" onClick={() => handleDelete(todo.id)}>
-                        Delete  {/* Trigger the delete confirmation and remove the todo */}
-                      </button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <>
+              <div className='bg-gray-400 w-full'>
+                <h2 className="mb-3 text-3xl font-bold text-green-400 md:text-5xl">
+                  Added Todo  {/* Show this message if at least one todo is added */}
+                </h2>
+              
+                <ul className="max-h-[490px] overflow-y-auto w-[99%] p-0">
+                  {todos.map((todo) => (
+                    <li key={todo.id} className="flex justify-between items-center py-2">
+                      <div>
+                        <p className={`font-bold ${todo.completed ? 'line-through text-green-500' : ''}`}>{todo.name}</p>  {/* Apply line-through if completed */}
+                        <p className={`${todo.completed ? 'line-through text-green-500' : ''}`}>{todo.description}</p>  {/* Apply line-through if completed */}
+                        <p>{todo.date}</p>  {/* Display the todo date */}
+                      </div>
+                      <div className="flex gap-2">
+                        <button className="bg-blue-500 px-2 py-1 rounded" onClick={() => handleComplete(todo.id)}>
+                          Complete  {/* Mark the todo as complete */}
+                        </button>
+                        <button className="bg-yellow-500 px-2 py-1 rounded" onClick={() => handleEdit(todo.id)}>
+                          Edit  {/* Enable editing mode for the selected todo */}
+                        </button>
+                        <button className="bg-red-500 px-2 py-1 rounded" onClick={() => handleDelete(todo.id)}>
+                          Delete  {/* Trigger the delete confirmation and remove the todo */}
+                        </button>
+                        
+                      </div>
+                    </li>
+                    
+                  ))}
+                </ul>
+                </div>
+              </>
             )}
           </div>
         </div>
       </div>
+      
     </>
   );
 }
 
 export default App;
-
-  
