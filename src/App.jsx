@@ -28,7 +28,7 @@ function App() {
       setTodos(updatedTodos);  // Update the todos state with the edited todo
       setIsEditing(false);  // Reset editing mode after saving the changes
     } else {
-      // Create a new todo with an ID, name, description, date, and a default completed status
+      // Create a new todo with an ID, name, description, date, and a default `completed` status
       const newTodo = {
         id: Date.now(),  // Using the current timestamp as a unique ID for the todo
         name,
@@ -68,7 +68,7 @@ function App() {
   const handleComplete = (id) => {
     const updatedTodos = todos.map(todo => 
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );  // Toggle the completed property of the matching todo
+    );  // Toggle the `completed` property of the matching todo
     setTodos(updatedTodos);  // Update the todos state with the modified todo
   };
 
@@ -77,7 +77,7 @@ function App() {
       <Navbar />  {/* Render the Navbar component */}
       <div className='bg-orange-400 h-[160vh] md:h-[120vh] w-[100%] '>
         <div className='flex justify-center py-10'>
-          <div className='font-bold text-4xl lg:text-5xl md:text-3xl text-white'>Todo List</div>  {/* Display the heading */}
+          <div className='font-bold text-4xl md:tex-2xl text-white'>Todo List</div>  {/* Display the heading */}
         </div>
         <div className='flex flex-col flex-wrap items-center justify-center w-full overflow-hidden'>
           <form 
@@ -91,7 +91,7 @@ function App() {
                   required id="name" 
                   className="w-[93%] px-2 py-1 font-normal text-black border border-orange-500 rounded-lg focus:outline-none" 
                   type="text" value={name} 
-                  onChange={(e) => setName(e.target.value)}  // Update the name state when the input changes
+                  onChange={(e) => setName(e.target.value)}  // Update the `name` state when the input changes
                 />
               </div>
               <div className='flex flex-col'>
@@ -100,7 +100,7 @@ function App() {
                   required id="description" 
                   className="w-[93%] px-2 py-1 font-normal text-black border border-orange-500 rounded-lg focus:outline-none" 
                   type="text" value={description} 
-                  onChange={(e) => setDescription(e.target.value)}  // Update the description state when the input changes
+                  onChange={(e) => setDescription(e.target.value)}  // Update the `description` state when the input changes
                 />
               </div>
               <div className='flex flex-col'>
@@ -109,7 +109,7 @@ function App() {
                   required id="date" 
                   className="w-[93%] px-2 py-1 font-normal text-black border border-orange-500 rounded-lg focus:outline-none" 
                   type="date" value={date} 
-                  onChange={(e) => setDate(e.target.value)}  // Update the date state when the input changes
+                  onChange={(e) => setDate(e.target.value)}  // Update the `date` state when the input changes
                 />
               </div>
             </div>
@@ -128,19 +128,19 @@ function App() {
               </h2>
             ) : (
               <>
-              <div className=' w-full rounded'>
+              <div className='w-full rounded'>
                 <h2 className="mb-3 text-3xl font-bold text-green-400  flex justify-center md:text-5xl">
                   Added Todo  {/* Show this message if at least one todo is added */}
                 </h2>
                 
                   {todos.map((todo) => (
-                    <div key={todo.id} className="flex justify-between items-center p-2 w-auto bg-[rgba(0,0,0,0.5)] m-5 rounded">
+                    <div key={todo.id} className="grid justify-between items-center p-2 w-auto bg-[rgba(0,0,0,0.5)] m-5 rounded md:flex">
                       <div>
                         <p className={`font-bold ${todo.completed ? 'line-through text-green-500' : ''}`}>{todo.name}</p>  {/* Apply line-through if completed */}
                         <p className={`${todo.completed ? 'line-through text-green-500' : ''}`}>{todo.description}</p>  {/* Apply line-through if completed */}
                         <p>{todo.date}</p>  {/* Display the todo date */}
                       </div>
-                      <div className="flex gap-2">
+                      <div className="grid gap-2 sm:flex">
                         <button className="bg-blue-500 px-2 py-1 rounded" onClick={() => handleComplete(todo.id)}>
                           Complete  {/* Mark the todo as complete */}
                         </button>
@@ -150,6 +150,7 @@ function App() {
                         <button className="bg-red-500 px-2 py-1 rounded" onClick={() => handleDelete(todo.id)}>
                           Delete  {/* Trigger the delete confirmation and remove the todo */}
                         </button>
+                        
                       </div>
                     </div>                    
                   ))}
