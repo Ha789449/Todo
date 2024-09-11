@@ -4,7 +4,7 @@ import Navbar from './Components/Navbar';  // Importing the Navbar component to 
 function App() {
   // State to manage the list of todos
   const [todos, setTodos] = useState([]);
-  
+
   // State to manage the input values for the new todo
   const [name, setName] = useState('');  // For managing the todo name
   const [description, setDescription] = useState('');  // For managing the todo description
@@ -12,17 +12,30 @@ function App() {
 
   // State to track if we are editing an existing todo
   const [isEditing, setIsEditing] = useState(false);
-  
+
   // State to store the ID of the todo being edited
-  const [currentTodoId, setCurrentTodoId] = useState(null);
+  const [currentTodoId, setCurrentTodoId] = useState();
 
   // Function to handle the submission of the form (either add or edit a todo)
   const handleSubmit = (e) => {
     e.preventDefault();  // Prevents the default form submission behavior (page reload)
 
+    // Get the current date and compare it with the selected date
+    const selectedDate = new Date(date);
+    const currentDate = new Date();
+
+    // Reset time to midnight for a fair comparison of dates only
+    currentDate.setHours(0, 0, 0, 0);
+
+    if (selectedDate < currentDate) {
+      // If the selected date is in the past, show an alert
+      alert("You cannot select a past date.");
+      return; // Stop the form submission
+    }
+
     if (isEditing) {
       // If editing, map through todos and update the matching todo by its ID
-      const updatedTodos = todos.map(todo => 
+      const updatedTodos = todos.map(todo =>
         todo.id === currentTodoId ? { ...todo, name, description, date } : todo
       );
       setTodos(updatedTodos);  // Update the todos state with the edited todo
@@ -66,7 +79,7 @@ function App() {
 
   // Function to toggle the completed status of a todo
   const handleComplete = (id) => {
-    const updatedTodos = todos.map(todo => 
+    const updatedTodos = todos.map(todo =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );  // Toggle the `completed` property of the matching todo
     setTodos(updatedTodos);  // Update the todos state with the modified todo
@@ -140,7 +153,7 @@ function App() {
                         <p className={`${todo.completed ? 'line-through text-green-500' : ''}`}>{todo.description}</p>  {/* Apply line-through if completed */}
                         <p>{todo.date}</p>  {/* Display the todo date */}
                       </div>
-                      <div className="grid gap-2 sm:flex">
+                      <div className="grid gap-2 sm:flex md:flex">
                         <button className="bg-blue-500 px-2 py-1 rounded" onClick={() => handleComplete(todo.id)}>
                           Complete  {/* Mark the todo as complete */}
                         </button>
@@ -155,7 +168,6 @@ function App() {
                     </div>                    
                   ))}
                   </div>
-           
               </>
             )}
           </div>
